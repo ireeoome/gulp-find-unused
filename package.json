@@ -13,8 +13,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ireeoome/gulp-find-unused.git"
   },
+  "scripts": {
+    "test": "make test"
+  },
+  "bugs": {
+    "url": "https://github.com/ireeoome/gulp-find-unused/issues"
+  }
   "dependencies": {
     "through2": "latest",
     "gulp-util": "latest"
