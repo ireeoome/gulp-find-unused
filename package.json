@@ -1,0 +1,20 @@
+{
+  "name": "gulp-find-unused",
+  "version": "0.1.4",
+  "description": "use text match to find the files that are not used in project",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "unused",
+    "files",
+    "detect"
+  ],
+  "dependencies": {
+    "through2": "latest",
+    "gulp-util": "latest"
+  },
+  "author": "Reeoo",
+  "license": "MIT"
+}
