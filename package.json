@@ -20,7 +20,7 @@
   },
   "bugs": {
     "url": "https://github.com/ireeoome/gulp-find-unused/issues"
-  }
+  },
   "dependencies": {
     "through2": "latest",
     "gulp-util": "latest"
