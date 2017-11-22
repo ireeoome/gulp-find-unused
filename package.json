@@ -11,6 +11,10 @@
     "files",
     "detect"
   ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "dependencies": {
     "through2": "latest",
     "gulp-util": "latest"
