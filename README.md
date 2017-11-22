@@ -3,15 +3,12 @@
 # Getting Started
 
 ```
-
 npm install gulp-find-unused --save-dev
-
 ```
 
 # Usage
 
 ```
-
 let fu = require('gulp-find-unused');
 gulp.task("fu", () => {
     return gulp.src("build_artifacts")
@@ -29,32 +26,26 @@ gulp.task("fu", () => {
 # Options
 
 ## ignoreList
-
 Type:Array Default value:[]
-
 一个忽略检测的文件的列表
 
 ## createFile
-
 Type:Boolean Default value:false
-
 是否把检测结果输出到一个独立的文件中
 
 ## fileDir
-
 `createFile`为`true`的情况下，这个值才有用
-
 Type:String Default value:跟gulp.src的参数保持一致。
-
 要输出的文件的路径
 
 
 ## debug
-
 Type:Boolean Default value:false
-
-是否显示LOG信息
+是否打印日志信息
 
 # Release History
+|日期|版本|说明|
+|---|---|---|
+|2017-11-22|v0.1.0|First commit of gulp-find-unused.|
 
-2017-11-22	v0.1.0	First commit of gulp-find-unused. 
+		 
