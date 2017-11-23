@@ -2,13 +2,13 @@
 
 # Getting Started
 
-```
+```javascript
 npm install gulp-find-unused --save-dev
 ```
 
 # Usage
 
-```
+```javascript
 let fu = require('gulp-find-unused');
 gulp.task("fu", () => {
     return gulp.src("build_artifacts")
@@ -57,6 +57,5 @@ Type:Boolean Default value:false
 
 |日期|版本|说明|
 |---|---|---|
-|2017-11-22|v0.1.0|First commit of gulp-find-unused.|
-
-		 
+|2017-11-23|v0.2.0| unused files's size print support. |
+|2017-11-22|v0.1.0| First commit of gulp-find-unused. |
