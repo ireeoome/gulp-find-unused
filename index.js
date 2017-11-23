@@ -25,11 +25,15 @@ function fsExistsSync(path) {
 
 function readFileList(filePath, fileList) {
     let files = fs.readdirSync(filePath);
-    files.forEach((item) => {
+    for (let item of files) {
         let stat = fs.statSync(path.resolve(filePath, item));
         if (stat.isDirectory()) {
             readFileList(path.resolve(filePath, item), fileList)
         } else {
+            if (item === 'ry.json') {
+                continue;
+            }
+
             let obj = {};
             let fileAbs = path.resolve(filePath, item);
             fileAbs = fileAbs.split(path.sep).join("/");
@@ -37,6 +41,7 @@ function readFileList(filePath, fileList) {
             obj.path = filePath;
             obj.fileName = item;
             obj.fileAbs = fileAbs;
+            obj.size = stat.size;
             obj.useList = [];
             obj.matchedPath = "";
             obj.pathGroup = [] || obj.pathGroup;
@@ -51,7 +56,7 @@ function readFileList(filePath, fileList) {
             }
             fileList.push(obj);
         }
-    })
+    }
     return fileList;
 }
 
@@ -85,6 +90,7 @@ function searchFileNotUse() {
 
 function writeRes(dir, data) {
     if (path.isAbsolute(dir)) {
+        fileLeftDir = dir;
         fs.writeFileSync(path.join(dir, 'ry.json'), new Buffer(JSON.stringify(data), 'utf-8'))
     }
     else {
@@ -127,33 +133,38 @@ module.exports = function (options) {
         fileList = readFileList(filePath, []);
         let res = searchFileNotUse();
         let count = 0;
+        let totalSize = 0;
         let rongyu = [];
         res.forEach((file) => {
             if (!file.useList.length && !file.ignore) {
                 count++;
                 rongyu.push(file.fileName);
+                totalSize += file.size;
                 if (debug) {
-                    gUtil.log(gUtil.colors.red.bold(`发现可疑冗余文件：${file.fileName}，路径：${file.fileAbs}`));
+                    gUtil.log(gUtil.colors.red.bold(`发现可疑冗余文件：${file.fileName}，路径：${file.fileAbs},文件大小:：${file.size}`));
                 }
             }
         })
 
-        if (createFile) {
+        if (createFile && fileDir) {
             writeRes(fileDir || filePath, rongyu)
         }
 
         if (debug) {
-            gUtil.log(gUtil.colors.green.bold(`文件个数：${fileList.length}`));
+            gUtil.log(gUtil.colors.green.bold(`扫描文件个数：${fileList.length}`));
             if (count > 0) {
                 gUtil.log(gUtil.colors.red.bold(`可疑冗余文件个数：${count}，请确认`));
                 gUtil.log(gUtil.colors.red.bold(`冗余率：` + ((count / fileList.length).toFixed(6) * 100) + "%"));
+                gUtil.log(gUtil.colors.red.bold("冗余文件总大小【" + totalSize + '】B'));
             }
             else {
                 gUtil.log(gUtil.colors.red.bold(`暂未发现冗余文件`));
             }
 
             if (createFile) {
-                gUtil.log(gUtil.colors.green.bold('冗余文件结果在:' + fileLeftDir));
+
+                fileLeftDir = fileLeftDir.split(path.sep).join("/");
+                gUtil.log(gUtil.colors.green.bold('冗余文件结果在:' + fileLeftDir + '/ry.json'));
             }
             gUtil.log(gUtil.colors.green.bold('处理完毕'));
         }
