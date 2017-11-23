@@ -1,5 +1,5 @@
 {
-  "name": "find-unused",
+  "name": "gulp-find-unused",
   "version": "0.3.2",
   "description": "use text match to find the files that are not used in project",
   "main": "index.js",
