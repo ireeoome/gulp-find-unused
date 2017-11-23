@@ -25,15 +25,11 @@ function fsExistsSync(path) {
 
 function readFileList(filePath, fileList) {
     let files = fs.readdirSync(filePath);
-    for (let item of files) {
+    files.forEach((item) => {
         let stat = fs.statSync(path.resolve(filePath, item));
         if (stat.isDirectory()) {
             readFileList(path.resolve(filePath, item), fileList)
         } else {
-            if (item === 'ry.json') {
-                continue;
-            }
-
             let obj = {};
             let fileAbs = path.resolve(filePath, item);
             fileAbs = fileAbs.split(path.sep).join("/");
@@ -56,7 +52,7 @@ function readFileList(filePath, fileList) {
             }
             fileList.push(obj);
         }
-    }
+    })
     return fileList;
 }
 
@@ -90,7 +86,6 @@ function searchFileNotUse() {
 
 function writeRes(dir, data) {
     if (path.isAbsolute(dir)) {
-        fileLeftDir = dir;
         fs.writeFileSync(path.join(dir, 'ry.json'), new Buffer(JSON.stringify(data), 'utf-8'))
     }
     else {
@@ -146,7 +141,7 @@ module.exports = function (options) {
             }
         })
 
-        if (createFile && fileDir) {
+        if (createFile) {
             writeRes(fileDir || filePath, rongyu)
         }
 
@@ -162,9 +157,7 @@ module.exports = function (options) {
             }
 
             if (createFile) {
-
-                fileLeftDir = fileLeftDir.split(path.sep).join("/");
-                gUtil.log(gUtil.colors.green.bold('冗余文件结果在:' + fileLeftDir + '/ry.json'));
+                gUtil.log(gUtil.colors.green.bold('冗余文件结果在:' + fileLeftDir));
             }
             gUtil.log(gUtil.colors.green.bold('处理完毕'));
         }
