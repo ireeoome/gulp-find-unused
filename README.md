@@ -58,7 +58,7 @@ Type:Boolean Default value:false
 
 是否打印日志信息
 
-## TODOList
+## ToDoList
 
 - [ ] ignoreList支持路径和多层路径，目前仅支持文件名称
 
