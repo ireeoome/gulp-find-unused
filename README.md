@@ -1,6 +1,6 @@
 检测文件夹中的资源有没有被项目使用到，没被用到的会被标记为冗余文件。
 
-仅支持***非webpack打包项目***，`webpack`打包的项目，请使用`tree-shaking`
+仅支持【非webpack】打包项目 ，`webpack`打包的项目，请使用`tree-shaking`
 
 # Getting Started
 
