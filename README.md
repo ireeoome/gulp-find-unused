@@ -25,6 +25,9 @@ gulp.task("fu", () => {
 
 ```
 
+`gulp.src`导入的路径为用`gulp`构建之后的工程目录
+
+
 # Options
 
 ## ignoreList
@@ -54,6 +57,10 @@ Type:String Default value:跟gulp.src的参数保持一致。
 Type:Boolean Default value:false
 
 是否打印日志信息
+
+## TODOList
+
+- [ ] ignoreList支持路径和多层路径，目前仅支持文件名称
 
 # Release History
 
